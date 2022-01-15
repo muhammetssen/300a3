@@ -1,0 +1,11 @@
+Unsuccessful
+Step 1: Columns: []
+Step 1: Available: [0, 1, 2, 3, 4, 5, 6, 7]
+Step 2: Columns: [3]
+Step 2: Available: [0, 1, 5, 6, 7]
+Step 3: Columns: [3, 1]
+Step 3: Available: [4, 6, 7]
+Step 4: Columns: [3, 1, 7]
+Step 4: Available: [2, 4, 5]
+Step 5: Columns: [3, 1, 7, 4]
+Step 5: Available: [0, 2, 6]
