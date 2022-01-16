@@ -1,7 +1,6 @@
 import random as rand
 
 
-# [1,3,2,5,4]
 def is_valid(state):
     chosens = []
     n = len(state)
@@ -85,22 +84,21 @@ def QueensLasVegas(n, k):
     return column
 
 
-values = [6,8,10]
+values = [6, 8, 10]
 for value in values:
     print(f"{'-'*15} {value} {'-'*15}")
     for k_value in range(value):
         print(f"k is {k_value}")
         count = 0
         for i in range(10000):
-            current_state = QueensLasVegas(n=value, k=k_value)
-            if (current_state == None): continue
-            solution_array = solver(n=value,current_state=current_state)
-            if len(solution_array)> 0:
-                count +=1
+            current_state = None 
+            while current_state == None: # try until finding 
+                current_state = QueensLasVegas(n=value, k=k_value)
+
+            solution_array = solver(n=value, current_state=current_state)
+            if len(solution_array) > 0:
+                count += 1
         print(f"Number of successful placements is {count}")
         print("Number of trials is 10000")
         print(f"Probabilty that it will come to a solution is {count / 10000}")
-    print()    
-     
-        
-# print(f"{current_state=}")
+    print()
