@@ -54,7 +54,7 @@ def part1():
                     f.write("\n")
                     if solution != None:
                         count += 1
-                        f.write(f"Step {value+1}: Columns = {solution}\n")
+                        f.write(f"Step {value+1}: Columns: {solution}\n")
                     f.write("\n")
 
             print(f"LasVegas algorithm With n = {value}")
