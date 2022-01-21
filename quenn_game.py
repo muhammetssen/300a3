@@ -36,62 +36,54 @@ def QueensLasVegas(n):
     return column, logs
 
 
-values = [6, 8, 10,16]
+values = [6, 8, 10]
 
 
-def runner(n):
-    for value in values:
-        solution, logs = QueensLasVegas(value)
-        with open(f"result_{value}.txt", 'w+') as f:
-            if solution == None:
-                f.write("Unsuccessful\n")
-            else:
-                f.write("Successful\n")
-            f.write("\n".join(logs))
-            f.write("\n")
-            if solution != None:
-                f.write(f"Step {value+1}: Columns = {solution}")
-
-
-def propabilities():
+def runner():
     for value in values:
         count = 0
+        s = 0
+        us = 0
         for i in range(10000):
             solution, logs = QueensLasVegas(value)
-            if solution != None:
-                count += 1
+            with open(f"result_{value}.txt", 'a+') as f:
+                if solution == None:
+                    f.write("Unsuccessful\n")
+                    if us < 2:
+                        us += 1
+                        with open(f"result_mini.txt", 'a+') as mini_f:
+                            mini_f.write(f"n={value}, ")
+                            mini_f.write("Unsuccessful\n")
+                            mini_f.write("\n".join(logs))
+                            mini_f.write("\n\n\n")
+                            mini_f.close()
+
+                else:
+                    f.write("Successful\n")
+                    if s < 2:
+                        s += 1
+                        with open(f"result_mini.txt", 'a+') as mini_f:
+                            mini_f.write(f"n={value}, ")
+                            mini_f.write("Successful\n")
+                            mini_f.write("\n".join(logs))
+                            mini_f.write("\n")
+                            mini_f.write(
+                                f"Step {value+1}: Columns = {solution}\n")
+                            mini_f.write("\n")
+                            mini_f.close()
+                f.write("\n".join(logs))
+                f.write("\n")
+                if solution != None:
+                    count += 1
+                    f.write(f"Step {value+1}: Columns = {solution}\n")
+                f.write("\n")
+
         print(f"LasVegas algorithm With n = {value}")
         print(f"Number of successful placements is {count}")
         print("Number of trials is 10000")
-        print(f"Probabilty that it will come to a solution is {count / 10000}")
+        print(
+            f"Probabilty that it will come to a solution is {count / 10000}\n")
 
-
-def result_mini():
-    for value in values:
-        s = 0
-        us = 0
-        while s < 2:
-            solution, logs = QueensLasVegas(value)
-            if solution == None:
-                continue
-            s += 1
-            with open(f"result_mini.txt", 'a+') as f:
-                f.write(f"n={value}, ")
-                f.write("Successful\n")
-                f.write("\n".join(logs))
-                f.write("\n")
-                f.write(f"Step {value+1}: Columns = {solution}\n")
-                f.write("\n")
-        while us < 2:
-            solution, logs = QueensLasVegas(value)
-            if solution != None:
-                continue
-            us += 1
-            with open(f"result_mini.txt", 'a+') as f:
-                f.write(f"n={value}, ")
-                f.write("Unsuccessful\n")
-                f.write("\n".join(logs))
-                f.write("\n\n\n")
 
 # result_mini()
-propabilities()
+runner()
